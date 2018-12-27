@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JS Drum Kit</title>
+	<link rel="stylesheet" type="text/css" href="day1.css">
+</head>
+<body>
+	<h1>Press any of the keys below and turn on your sound</h1>
+
+	<div class="keys">
+		<div data-key="65" class="key">
+			<kbd>A</kbd>
+			<span class="sound">bubbles</span>
+		</div>
+
+		<div data-key="83" class="key">
+			<kbd>S</kbd>
+			<span class="sound">clay</span>
+		</div>
+		
+		<div data-key="68" class="key">
+			<kbd>D</kbd>
+			<span class="sound">confetti</span>
+		</div>
+
+		<div data-key="70" class="key">
+			<kbd>F</kbd>
+			<span class="sound">corona</span>
+		</div>
+
+		<div data-key="71" class="key">
+			<kbd>G</kbd>
+			<span class="sound">dotted-spiral</span>
+		</div>
+
+		<div data-key="72" class="key">
+			<kbd>H</kbd>
+			<span class="sound">glimmer</span>
+		</div>
+
+		<div data-key="74" class="key">
+			<kbd>J</kbd>
+			<span class="sound">moon</span>
+		</div>
+
+		<div data-key="75" class="key">
+			<kbd>K</kbd>
+			<span class="sound">pinwheel</span>
+		</div>
+
+		<div data-key="76" class="key">
+			<kbd>L</kbd>
+			<span class="sound">splits</span>
+		</div>
+	</div>
+
+	<audio data-key="65" src="sounds/bubbles.mp3"></audio>
+	<audio data-key="83" src="sounds/clay.mp3"></audio>
+	<audio data-key="68" src="sounds/confetti.mp3"></audio>
+	<audio data-key="70" src="sounds/corona.mp3"></audio>
+	<audio data-key="71" src="sounds/dotted-spiral.mp3"></audio>
+	<audio data-key="72" src="sounds/glimmer.mp3"></audio>
+	<audio data-key="74" src="sounds/moon.mp3"></audio>
+	<audio data-key="75" src="sounds/pinwheel.mp3"></audio>
+	<audio data-key="76" src="sounds/splits.mp3"></audio>
+
+<script>
+	window.addEventListener('keydown', function (e) {
+		const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+		const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+		if (!audio) return; //stop function from running all together
+		audio.currentTime = 0; //rewind to the start
+		audio.play();
+		key.classList.add("playing");
+	})
+
+	function removeTransition(e) {
+		if (e.propertyName !== "transform") return; // skip it if it's not a transform
+		this.classList.remove("playing");
+	}
+
+	const keys = document.querySelectorAll('.key');
+	keys.forEach(key => key.addEventListener("transitionend", removeTransition))
+
+</script>
+
+</body>
+</html>

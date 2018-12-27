@@ -1,0 +1,27 @@
+DAY 1 - Keyboard with sounds
+
+- <kbd> </kbd> ; will make the letters look like it's a keyboard
+- key.classList.add("newClass") ; will add a class without jQuery
+- key.classList.remove("newClass") ; will remove a class without jQuery
+- key.classList.toggle("newClass') ; will toggle classes without jQuery
+- we can use the website keycode.info to attach every key on the keyboard and associate it with a number
+
+	keys.forEach(key => key.addEventListener("transitionend", removeTransition))
+- select all keys (node list)
+- for each key, we will add an Event listener
+- when the transitionend, execute the function "removeTransition"
+
+
+	function removeTransition(e) {
+		if (e.propertyName !== "transform") return; // skip it if it's not a transform
+		this.classList.remove("playing");
+	}
+- if the propertyName of e is not transform, we skip it
+- this ; if we don't know what it refers to, we can console.log it and it will say what it is
+
+	audio.currentTime = 0; //rewind to the start
+- this is for the sound to restart even if it hasn't finished yet
+- we can restart the sound as many times as we want
+
+DAY 2
+
